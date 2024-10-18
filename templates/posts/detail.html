@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Detail</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>Author: {{ post.author }} | Category: {{ post.category }}</p>
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="image">
+    {% endif %}
+    <p>{{ post.body }}</p>
+    <p><i>{{ post.created_at }}</i></p>
+    <a href="{% url 'edit' post.id %}">Edit post</a>
+</body>
+</html>
