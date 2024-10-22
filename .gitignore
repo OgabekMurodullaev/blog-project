@@ -1,2 +1,8 @@
 .env
 .idea/
+
+Pipfile
+Pipfile.lock
+
+db.sqlite3
+
