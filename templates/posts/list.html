@@ -5,6 +5,7 @@
     <title>Posts</title>
 </head>
 <body>
+    <h1>Recent posts | </h1><a href="{% url 'add-post' %}">Create new post</a>
     {% for post in posts %}
         <h2><a href="{% url 'detail' post.id %}">{{ post.title }}</a></h2>
         <p>Author: {{ post.author }} | <span>{{ post.created_at }}</span></p>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post delete</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>Delete this post?</p>
+    <p><a href="{% url 'delete' post.id %}">Yes, delete post</a></p>
+</body>
+</html>

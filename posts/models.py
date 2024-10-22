@@ -1,6 +1,8 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+
 from taggit.managers import TaggableManager
 
 from users.models import CustomUser
@@ -38,6 +40,9 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
+
+    def views_count(self):
+        return self.views.count()
 
 
 class Comment(models.Model):

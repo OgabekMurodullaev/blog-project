@@ -12,6 +12,15 @@
     {% endif %}
     <p>{{ post.body }}</p>
     <p><i>{{ post.created_at }}</i></p>
-    <a href="{% url 'edit' post.id %}">Edit post</a>
+    <a href="{% url 'edit' post.id %}">Edit post</a> |
+    <a href="{% url 'confirm-delete' post.id %}">Delete post</a>
+    <p>Views count: {{ post.views_count }}</p>
+    <hr>
+    <h3>Comments</h3>
+    <form method="post" action="{% url 'add-comment' post.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send comment</button>
+    </form>
 </body>
 </html>

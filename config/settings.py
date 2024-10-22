@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'users',
     'pages',
     'posts',
+    'shared',
 
     # installed apps
     'taggit',
