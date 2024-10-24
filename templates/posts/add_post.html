@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Post</title>
-</head>
-<body>
-    <h1>Add Post</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ post_form.as_p }}
-        <button>Add post</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Post{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Post Qo'shish</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ post_form|crispy }}
+            <button type="submit" class="btn btn-primary">Postni qo'shish</button>
+        </form>
+    </div>
+{% endblock %}

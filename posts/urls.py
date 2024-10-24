@@ -4,6 +4,8 @@ from posts.views import (PostListView, PostDetailView, AddPostView,
                          PostUpdateView, PostDeleteConfirmView, PostDeleteView,
                          PostCommentCreateView, MostViewedThisWeekView, MostViewedThisMonthView)
 
+
+
 urlpatterns = [
     path('list/', PostListView.as_view(), name='posts'),
     path('new/', AddPostView.as_view(), name='add-post'),

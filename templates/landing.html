@@ -1,18 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Landing page</h1>
-    <a href="{% url 'week' %}">Ushbu haftada eng ko'p ko'rilgan</a>
-    <a href="{% url 'month' %}">Ushbu oyda eng ko'p ko'rilgan</a>
-    {% if request.user.is_authenticated %}
-        <p>Salom, {{ user.username }} | <a href="{% url 'logout' %}">Chiqish</a></p>
-    {% else %}
-        <p><a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
-    <p><a href="{% url 'posts' %}">Posts</a></p>
-</body>
-</html>
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Bosh Sahifa{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h1 class="text-center">Bosh Sahifa</h1>
+
+        <!-- Eng yangi postlar -->
+        <div class="row my-5">
+            <div class="col">
+                <h2 class="mb-3">Eng Yangi Postlar</h2>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for post in latest %}
+                   <div class="col">
+                    <div class="card">
+                        <img src="{{ post.image.url }}" class="card-img-top" alt="Post 1">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.body|truncatewords:15 }}</p>
+                            <div class="d-flex align-items-center mt-3">
+                                {% if post.author.profile_pic %}
+                                    <img src="{{ post.author.profile_pic.url }}" alt="{{ post.author.username }}" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                {% else %}
+                                    <img src="#" alt="Default Profile" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                {% endif %}
+                                <div>
+                                    <small class="text-muted">{{ post.author.username }}</small><br>
+                                    <small class="text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Eng ko'p ko'rilgan postlar -->
+        <div class="row my-5">
+            <div class="col">
+                <h2 class="mb-3">Eng Ko'p Ko'rilgan Postlar</h2>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for post in most_viewed %}
+                   <div class="col">
+                        <div class="card">
+                            <img src="{{ post.image.url }}" class="card-img-top" alt="Post 1">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.body|truncatewords:15 }}</p>
+                            <div class="d-flex align-items-center mt-3">
+                                    <img src="{{ post.author.profile_pic.url }}" alt="{{ post.author.username }}" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                <div>
+                                    <small class="text-muted">{{ post.author.username }}</small><br>
+                                    <small class="text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Haftaning eng ommabop postlari -->
+        <div class="row my-5">
+            <div class="col">
+                <h2 class="mb-3">Haftaning Eng Ommabop Postlari</h2>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for post in weekly %}
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ post.image.url }}" class="card-img-top" alt="Post 1">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{{ post.body|truncatewords:15 }}</p>
+                                <div class="d-flex align-items-center mt-3">
+                                        <img src="{{ post.author.profile_pic.url }}" alt="{{ post.author.username }}" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                    <div>
+                                        <small class="text-muted">{{ post.author.username }}</small><br>
+                                        <small class="text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Oyning eng ommabop postlari -->
+        <div class="row my-5">
+            <div class="col">
+                <h2 class="mb-3">Oyning Eng Ommabop Postlari</h2>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for post in monthly %}
+                        <div class="col">
+                            <div class="card">
+                                <img src="{{ post.image.url }}" class="card-img-top" alt="Post 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ post.title }}</h5>
+                                    <p class="card-text">{{ post.body|truncatewords:15 }}</p>
+                                    <div class="d-flex align-items-center mt-3">
+                                            <img src="{{ post.author.profile_pic.url }}" alt="{{ post.author.username }}" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                        <div>
+                                            <small class="text-muted">{{ post.author.username }}</small><br>
+                                            <small class="text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

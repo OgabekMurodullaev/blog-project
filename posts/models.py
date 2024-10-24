@@ -29,6 +29,7 @@ class Post(models.Model):
     tags = TaggableManager()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
+    objects = models.Manager()
 
     STATUS_CHOICES = [
         ('draft', 'Draft'),

@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.utils import timezone
 from django.views import View
 
 from posts.forms import AddPostForm, UpdatePostForm, CommentForm
@@ -13,8 +13,11 @@ from shared.utility import record_view, get_most_viewed_this_week, get_most_view
 
 class PostListView(View):
     def get(self, request):
-        posts = Post.objects.filter(status='published')
-        return render(request, 'posts/list.html', {"posts": posts})
+        posts = Post.objects.filter(status='published').order_by('id')
+        paginator = Paginator(posts, 3)
+        page_number = request.GET.get('page', 1)
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'posts/list.html', {"posts": page_obj})
 
 
 class PostDetailView(View):
