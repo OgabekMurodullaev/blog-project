@@ -10,7 +10,7 @@
         <!-- Eng yangi postlar -->
         <div class="row my-5">
             <div class="col">
-                <h2 class="mb-3">Eng Yangi Postlar</h2>
+                <h2 class="mb-3"><a href="{% url 'latest' %}" class="text-primary text-decoration-none">Eng Yangi Postlar</a></h2>
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                     {% for post in latest %}
                    <div class="col">
@@ -42,7 +42,7 @@
         <!-- Eng ko'p ko'rilgan postlar -->
         <div class="row my-5">
             <div class="col">
-                <h2 class="mb-3">Eng Ko'p Ko'rilgan Postlar</h2>
+                <h2 class="mb-3"><a href="{% url 'all-time' %}" class="text-primary text-decoration-none">Eng Ko'p Ko'rilgan Postlar</a></h2>
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                     {% for post in most_viewed %}
                    <div class="col">
@@ -70,7 +70,7 @@
         <!-- Haftaning eng ommabop postlari -->
         <div class="row my-5">
             <div class="col">
-                <h2 class="mb-3">Haftaning Eng Ommabop Postlari</h2>
+                <h2 class="mb-3"><a href="{% url 'weekly' %}" class="text-primary text-decoration-none">Haftaning Eng Ommabop Postlari</a></h2>
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                     {% for post in weekly %}
                     <div class="col">
@@ -97,7 +97,7 @@
         <!-- Oyning eng ommabop postlari -->
         <div class="row my-5">
             <div class="col">
-                <h2 class="mb-3">Oyning Eng Ommabop Postlari</h2>
+                <h2 class="mb-3"><a href="{% url 'monthly' %}" class="text-primary text-decoration-none">Oyning Eng Ommabop Postlari</a></h2>
                 <div class="row row-cols-1 row-cols-md-2 g-4">
                     {% for post in monthly %}
                         <div class="col">

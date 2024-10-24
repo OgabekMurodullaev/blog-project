@@ -1,12 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Posts</title>
-</head>
-<body>
-    {% for post in posts %}
-        {{ post.title }} views count {{ post.views_count }}
-    {% endfor %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %} Most Viewed Posts {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Eng ko'p ko'rilgan postlar</h2>
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <img src="{{ post.image.url }}" class="card-img-top" alt="Post image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body|truncatewords:30 }}</p>
+                    <p class="text-muted">Muallif: {{ post.author }} | {{ post.created_at }}</p>
+                    <a href="{% url 'detail' post.id %}" class="btn btn-primary">Batafsil</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Hech qanday post topilmadi.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if posts.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Boshiga</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Oldingi</a></li>
+            {% endif %}
+            <li class="page-item active">
+                <a class="page-link" href="#">{{ posts.number }}</a>
+            </li>
+            {% if posts.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Keyingi</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ posts.paginator.num_pages }}">Oxiriga &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

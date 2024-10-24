@@ -20,7 +20,7 @@ class PostListView(View):
         return render(request, 'posts/list.html', {"posts": page_obj})
 
 
-class PostDetailView(View):
+class PostDetailView(LoginRequiredMixin, View):
     def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         record_view(user=request.user, post=post)
@@ -48,7 +48,7 @@ class PostUpdateView(UserPassesTestMixin, View):
     def get(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
         edit_form = UpdatePostForm(instance=post)
-        return render(request, 'posts/edit.html', {"edit_form": edit_form})
+        return render(request, 'posts/edit.html', {"edit_form": edit_form, "post": post})
 
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
@@ -100,14 +100,4 @@ class PostCommentCreateView(LoginRequiredMixin, View):
         return render(request, 'posts/detail.html', {"form": form, "post": post})
 
 
-class MostViewedThisWeekView(View):
-    def get(self, request):
-        posts = get_most_viewed_this_week()
-        return render(request, 'posts/most_viewed_this_week.html', {"posts": posts})
-
-
-class MostViewedThisMonthView(View):
-    def get(self, request):
-        posts = get_most_views_this_month()
-        return render(request, 'posts/most_viewed_this_month.html', {"posts": posts})
 
