@@ -56,15 +56,15 @@
                 </div>
             </div>
 
-            {% if post.comments.all %}
+            {% if post.comments %}
             <div class="comments-section">
                 <h5>All Comments</h5>
                 <ul class="list-group">
                     {% for comment in post.comments.all %}
                     <li class="list-group-item">
-                        <strong>{{ comment.author }}</strong> - 
+                        <strong>{{ comment.user.username }}</strong> -
                         <span>{{ comment.created_at|date:"F d, Y H:i" }}</span>
-                        <p>{{ comment.body }}</p>
+                        <p>{{ comment.comment }}</p>
                     </li>
                     {% endfor %}
                 </ul>

@@ -25,6 +25,7 @@ h1, h2 {
 .list-group-item {
     border: 1px solid #e9ecef; /* Postlar uchun chegara */
     border-radius: 0.25rem; /* Yuqoridan pastga yumshatish */
+
 }
 
 .list-group-item:hover {
